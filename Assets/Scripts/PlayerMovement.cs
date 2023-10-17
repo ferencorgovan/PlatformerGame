@@ -18,14 +18,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool("isRunning", horizontal == 0 ? false : true); 
+        animator.SetBool("isRunning", horizontal == 0 ? false : true);
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
 
         if (!isFacingRight && horizontal > 0f)
         {
             Flip();
         }
-        else if (isFacingRight && horizontal < 0f) 
+        else if (isFacingRight && horizontal < 0f)
         {
             Flip();
         }
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
         }
-        
+
     }
     private bool IsGrounded()
     {
@@ -55,10 +55,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        isFacingRight = !isFacingRight;
-        Vector3 localscake = transform.localScale;
-        localscake.x *= -1f;
-        transform.localScale = localscake;
+        if (rb.bodyType != RigidbodyType2D.Static)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localscake = transform.localScale;
+            localscake.x *= -1f;
+            transform.localScale = localscake;
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
