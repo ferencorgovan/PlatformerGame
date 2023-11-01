@@ -46,7 +46,18 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
         }
+    }
 
+    public void Sit(InputAction.CallbackContext context)
+    {
+        if (context.performed && IsGrounded())
+        {
+            animator.SetBool("isSitting", true);
+        }
+        if (context.canceled)
+        {
+            animator.SetBool("isSitting", false);
+        }
     }
     private bool IsGrounded()
     {
