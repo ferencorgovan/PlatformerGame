@@ -8,6 +8,7 @@ TagManager:
   - Block
   - Trap
   - MapBound
+  - Coin
   layers:
   - Default
   - TransparentFX
