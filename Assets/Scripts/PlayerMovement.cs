@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
 
     private float horizontal;
-    public float speed = 3f;
+    public float speed = 5f;
     private float jumpingPower = 10f;
     private bool isFacingRight = true;
 
@@ -53,12 +53,27 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && IsGrounded())
         {
             animator.SetBool("isSitting", true);
+            speed = 2f;
         }
         if (context.canceled)
         {
             animator.SetBool("isSitting", false);
+            speed = 5f;
         }
     }
+
+    public void Run(InputAction.CallbackContext context)
+    {
+        if (context.performed && IsGrounded())
+        {
+            speed = 7.5f;
+        }
+        if (context.canceled)
+        {
+            speed = 5f;
+        }
+    }
+
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);

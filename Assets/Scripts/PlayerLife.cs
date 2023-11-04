@@ -42,5 +42,6 @@ public class PlayerLife : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
         player.transform.position = startPos;
         anim.SetTrigger("respawned");
+        
     }
 }
