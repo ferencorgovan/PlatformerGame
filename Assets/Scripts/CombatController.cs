@@ -10,7 +10,6 @@ public class CombatController : MonoBehaviour
     {
         if (!anim.GetBool("isSitting") && context.performed)
         {
-            //anim.SetBool("isAttacking", true);
             anim.SetTrigger("attack");
         }
     }

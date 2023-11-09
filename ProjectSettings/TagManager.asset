@@ -7,8 +7,9 @@ TagManager:
   - Ground
   - Block
   - Trap
-  - MapBound
   - Coin
+  - Interactable
+  - MapBound
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 785070279
+    locked: 0
+  - name: Interactive
+    uniqueID: 2584308809
     locked: 0
   - name: Default
     uniqueID: 0
