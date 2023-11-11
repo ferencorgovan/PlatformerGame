@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Chest : MonoBehaviour, IInteractive
 {
     private bool open = false;
@@ -10,11 +9,7 @@ public class Chest : MonoBehaviour, IInteractive
     [SerializeField] private ContentType contentType;
     [SerializeField] private Animator anim;
     [SerializeField] private Animator content_anim;
-    private SpriteRenderer chest_content;
-    private void Start()
-    {
-        chest_content = GetComponentInChildren<SpriteRenderer>();
-    }
+    [SerializeField] private int content_quantity;
     public void Interact()
     {
         if(!open)
@@ -24,7 +19,6 @@ public class Chest : MonoBehaviour, IInteractive
             AquireContent();
         }
     }
-
     private void AquireContent()
     {
         content_anim.SetTrigger("aquire");
@@ -32,6 +26,12 @@ public class Chest : MonoBehaviour, IInteractive
         {
             case ContentType.Sword:
                 StartCoroutine(AquireSword());
+                break;
+            case ContentType.Coin:
+                GameManager.instance.AddCoins(content_quantity);
+                break;
+            case ContentType.Health:
+                GameManager.instance.ChangeHealth(content_quantity);
                 break;
             default:
                 break;

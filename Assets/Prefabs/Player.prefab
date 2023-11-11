@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 9111518850258202671}
   - component: {fileID: 5214438126845592222}
   - component: {fileID: 3966093828835967124}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.028621674, y: 0.19332361}
+  m_Offset: {x: 0.01023674, y: 0.19332361}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -333,7 +333,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.50390625, y: 1.1228979}
+  m_Size: {x: 0.39032364, y: 1.1228979}
   m_EdgeRadius: 0
 --- !u!114 &5214438126845592222
 MonoBehaviour:
@@ -360,7 +360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bdc70502dfc3740856a2bdee209908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinCountText: {fileID: 0}
 --- !u!1 &6261079176457768038
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,6 +846,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4d87a0c4-9e88-43ed-a4a1-f3dacc37ac77
     m_ActionName: Player/Run[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 92677e5e-1e30-473a-b26b-2e935c3c0e12
+    m_ActionName: Player/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
