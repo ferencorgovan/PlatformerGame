@@ -9,6 +9,7 @@ public class PlayerData
     private bool hasWeapon;
     private int coins;
     private int currentLevel;
+    private int damage;
 
     public PlayerData()
     {
@@ -16,6 +17,7 @@ public class PlayerData
         this.hasWeapon = false;
         this.coins = 0;
         this.currentLevel = 0;
+        this.damage = 30;
     }
 
     public int Health 
@@ -40,4 +42,5 @@ public class PlayerData
     public bool HasWeapon { get => hasWeapon; set => hasWeapon = value; }
     public int Coins { get => coins; set => coins = value; }
     public int CurrentLevel { get => currentLevel; set => currentLevel = value; }
+    public int Damage { get => damage; set => damage = value; }
 }

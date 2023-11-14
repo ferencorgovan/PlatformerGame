@@ -19,8 +19,9 @@ public class Finish : MonoBehaviour
     private void CompleteLevel()
     {
         int nextLevel = SceneManager.GetActiveScene().buildIndex + 1;
-        SceneManager.LoadScene(nextLevel);
         GameManager.instance.SetCurrentLevel(nextLevel);
         GameManager.instance.SaveGame();
+        SceneManager.LoadScene(nextLevel);
+        
     }
 }

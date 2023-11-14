@@ -12,7 +12,10 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
     private void Start()
     {
@@ -20,28 +23,23 @@ public class GameManager : MonoBehaviour
     }
     public void SaveGame()
     {
-        string filePath = Application.persistentDataPath + "/PlayerData.json";
-        //string playerData = JsonUtility.ToJson(player);
+        string filePath = Path.Combine(Application.persistentDataPath, "PlayerData.json");
         string playerData = JsonConvert.SerializeObject(player);
 
-        Debug.Log(filePath);
         File.WriteAllText(filePath, playerData);
         Debug.Log("File saved.");
     }
 
     public void LoadGame()
     {
-        string filePath = Application.persistentDataPath + "/PlayerData.json";
+        string filePath = Path.Combine(Application.persistentDataPath, "PlayerData.json");
         if (File.Exists(filePath))
         {
             string playerData = File.ReadAllText(filePath);
-
-            //player = JsonUtility.FromJson<PlayerData>(playerData);
             player = JsonConvert.DeserializeObject<PlayerData>(playerData);
             Debug.Log("File loaded.");
             coinCountText.text = "" + player.Coins;
             HPText.text = "" + player.Health;
-
         }
         else
         {
@@ -66,14 +64,13 @@ public class GameManager : MonoBehaviour
         return player.Health <= 0;
     }
 
-    public void ResetHealth()
-    {
-        player.Health = 100;
-        HPText.text = "" + player.Health;
-    }
-
     public void SetCurrentLevel(int level)
     {
         player.CurrentLevel = level;
+    }
+
+    public int GetDamage()
+    {
+        return player.Damage;
     }
 }

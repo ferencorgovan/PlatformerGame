@@ -9,7 +9,6 @@ public class PlayerLife : MonoBehaviour
     private Animator anim;
     private Rigidbody2D rb;
     private BoxCollider2D bc;
-    [SerializeField] EdgeCollider2D sword;
     [SerializeField] GameObject player;
 
     Vector2 startPos;
@@ -49,7 +48,7 @@ public class PlayerLife : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
         player.transform.position = startPos;
         bc.enabled = true;
-        GameManager.instance.ResetHealth();
+        GameManager.instance.ChangeHealth(100);
         anim.SetTrigger("respawned");
     }
 }

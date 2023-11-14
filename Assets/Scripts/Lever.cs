@@ -14,6 +14,6 @@ public class Lever : MonoBehaviour, IInteractive
         switched = !switched;
         GetComponent<SpriteRenderer>().sprite = switched ? leverOn : leverOff;
 
-        FindObjectOfType<PuzzleManager>().SolvePuzzle(levelNumber, switched);
+        PuzzleManager.instance.SolvePuzzle(levelNumber, switched);
     }
 }
