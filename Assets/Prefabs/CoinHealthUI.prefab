@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7783501599382248934}
   - component: {fileID: 1281621798806969146}
   m_Layer: 5
-  m_Name: Coin Counter
+  m_Name: CoinText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 5376535275323601897}
   - component: {fileID: 1840187777321081767}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CoinHealthUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 2258236335738432393}
   - component: {fileID: 4641852837625660377}
   m_Layer: 5
-  m_Name: Coin
+  m_Name: CoinImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 7904028824483168627}
   - component: {fileID: 5083244606211381284}
   m_Layer: 5
-  m_Name: HP
+  m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 6684680568258344541}
   - component: {fileID: 8649750160536649346}
   m_Layer: 5
-  m_Name: Health
+  m_Name: HealthImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

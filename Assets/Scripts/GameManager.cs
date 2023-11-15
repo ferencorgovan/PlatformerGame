@@ -2,24 +2,38 @@ using UnityEngine;
 using System.IO;
 using TMPro;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] private TextMeshProUGUI coinCountText;
-    [SerializeField] private TextMeshProUGUI HPText;
+    private TextMeshProUGUI coinText;
+    private TextMeshProUGUI healthText;
     private PlayerData player;
-    
+
     private void Awake()
     {
-        if (instance == null)
+        if (instance != null && instance != this)
         {
-            instance = this;
+            Destroy(gameObject);
+            return;
         }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
     }
-    private void Start()
+
+    private void OnActiveSceneChanged(Scene current, Scene next)
     {
-        LoadGame();
+        if (next.buildIndex != 0 && next.buildIndex != 3)
+        {
+            coinText = GameObject.Find("CoinHealthUI").transform.Find("CoinText").GetComponent<TextMeshProUGUI>();
+            healthText = GameObject.Find("CoinHealthUI").transform.Find("HealthText").GetComponent<TextMeshProUGUI>();
+
+            coinText.text = "" + player.Coins;
+            healthText.text = "" + player.Health;
+        }
     }
     public void SaveGame()
     {
@@ -33,34 +47,28 @@ public class GameManager : MonoBehaviour
     public void LoadGame()
     {
         string filePath = Path.Combine(Application.persistentDataPath, "PlayerData.json");
-        if (File.Exists(filePath))
-        {
-            string playerData = File.ReadAllText(filePath);
-            player = JsonConvert.DeserializeObject<PlayerData>(playerData);
-            Debug.Log("File loaded.");
-            coinCountText.text = "" + player.Coins;
-            HPText.text = "" + player.Health;
-        }
-        else
-        {
-            NewGame();
-        }
+
+        string playerData = File.ReadAllText(filePath);
+        player = JsonConvert.DeserializeObject<PlayerData>(playerData);
+        Debug.Log("File loaded.");
+        SceneManager.LoadScene(player.CurrentLevel);
     }
 
     public void NewGame()
     {
         player = new PlayerData();
+        SceneManager.LoadScene(player.CurrentLevel);
     }
     public void AddCoins(int amount)
     {
         player.Coins += amount;
-        coinCountText.text = "" + player.Coins;
+        coinText.text = "" + player.Coins;
     }
 
     public bool ChangeHealth(int amount)
     {
         player.Health += amount;
-        HPText.text = "" + player.Health;
+        healthText.text = "" + player.Health;
         return player.Health <= 0;
     }
 

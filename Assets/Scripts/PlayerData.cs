@@ -16,7 +16,7 @@ public class PlayerData
         this.health = 100;
         this.hasWeapon = false;
         this.coins = 0;
-        this.currentLevel = 0;
+        this.currentLevel = 1;
         this.damage = 30;
     }
 

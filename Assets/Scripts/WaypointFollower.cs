@@ -23,7 +23,6 @@ public class PlatformMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.name == "Player")
         {
             collision.gameObject.transform.SetParent(transform);
