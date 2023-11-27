@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 [System.Serializable]
 public class PlayerData
 {
-    private int health;
+    private float health;
     private bool hasWeapon;
     private int coins;
     private int currentLevel;
-    private int damage;
-
+    private float damage;
     public PlayerData()
     {
         this.health = 100;
@@ -19,8 +14,7 @@ public class PlayerData
         this.currentLevel = 1;
         this.damage = 30;
     }
-
-    public int Health 
+    public float Health 
     { 
         get => health;
         set
@@ -40,7 +34,21 @@ public class PlayerData
         }
     }
     public bool HasWeapon { get => hasWeapon; set => hasWeapon = value; }
-    public int Coins { get => coins; set => coins = value; }
+    public int Coins 
+    {
+        get => coins; 
+        set
+        {
+            if (value < 0)
+            {
+                coins = 0;
+            }
+            else
+            {
+                coins = value;
+            }
+        }
+    }
     public int CurrentLevel { get => currentLevel; set => currentLevel = value; }
-    public int Damage { get => damage; set => damage = value; }
+    public float Damage { get => damage; set => damage = value; }
 }

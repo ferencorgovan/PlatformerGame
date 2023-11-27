@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -9,7 +6,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Transform routeEnd;
     private Animator anim;
 
-    private float speed = 2f;
+    [SerializeField] private float speed = 2f;
     private Vector3 initScale;
     private bool movingLeft;
 
@@ -23,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     {
         anim.SetBool("isRunning", false);
     }
+
     private void Update()
     {
         if (movingLeft)
@@ -53,10 +51,11 @@ public class EnemyMovement : MonoBehaviour
     {
         movingLeft = !movingLeft;
     }
+
     private void MoveInDirection(int direction)
     {
         anim.SetBool("isRunning", true);
-        transform.localScale = new Vector3(Mathf.Abs(-initScale.x) * direction, initScale.y, initScale.z);
+        transform.localScale = new Vector3(initScale.x * direction, initScale.y, initScale.z);
         transform.position = new Vector3(transform.position.x + Time.deltaTime * direction * speed, transform.position.y, transform.position.z);
     }
 }

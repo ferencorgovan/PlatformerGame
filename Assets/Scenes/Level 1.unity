@@ -2814,8 +2814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce61462dade26cf4390562c94e8343f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfParallax: 0.1
-  MainCamera: {fileID: 519420031}
+  _camera: {fileID: 519420031}
 --- !u!4 &1862122849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5537218912486279480, guid: f5deedb5a89d7664a9b2780d22d30fe3, type: 3}

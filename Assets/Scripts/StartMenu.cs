@@ -1,22 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.UI;
-
 public class StartMenu : MonoBehaviour
 {
     [SerializeField] private Button continueButton;
+
     private void Update()
     {
         if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerData.json")))
         {
-            continueButton.enabled = true;
+            continueButton.interactable = true;
         }
         else
         {
-            continueButton.enabled = false;
+            continueButton.interactable = false;
         }
     }
     public void Continue()

@@ -1,18 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody2D rb;
     private BoxCollider2D bc;
-    [SerializeField] GameObject player;
 
-    Vector2 startPos;
-    void Start()
+    private Vector2 startPos;
+    private void Start()
     {
         startPos = transform.position;
         anim = GetComponent<Animator>();
@@ -24,11 +19,12 @@ public class PlayerLife : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Trap") || collision.gameObject.CompareTag("MapBound"))
         {
+
             TakeDamage(100);
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (GameManager.instance.ChangeHealth(-damage))
         {
@@ -46,7 +42,7 @@ public class PlayerLife : MonoBehaviour
     private void RespawnPlayer()
     {
         rb.bodyType = RigidbodyType2D.Dynamic;
-        player.transform.position = startPos;
+        transform.parent.transform.position = startPos;
         bc.enabled = true;
         GameManager.instance.ChangeHealth(100);
         anim.SetTrigger("respawned");

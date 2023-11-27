@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,11 +9,10 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
 
     private float horizontal;
-    public float speed = 5f;
+    private float speed = 5f;
     private float jumpingPower = 10f;
     private bool isFacingRight = true;
 
-    // Update is called once per frame
     void Update()
     {
         animator.SetBool("isRunning", horizontal == 0 ? false : true);
@@ -31,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void Move(InputAction.CallbackContext context)
+    {
+        horizontal = context.ReadValue<Vector2>().x;
+    }
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.performed && IsGrounded())
@@ -84,14 +85,9 @@ public class PlayerMovement : MonoBehaviour
         if (rb.bodyType != RigidbodyType2D.Static)
         {
             isFacingRight = !isFacingRight;
-            Vector3 localscake = transform.localScale;
-            localscake.x *= -1f;
-            transform.localScale = localscake;
+            Vector3 localscale = transform.localScale;
+            localscale.x *= -1f;
+            transform.localScale = localscale;
         }
-    }
-
-    public void Move(InputAction.CallbackContext context)
-    {
-        horizontal = context.ReadValue<Vector2>().x;
     }
 }

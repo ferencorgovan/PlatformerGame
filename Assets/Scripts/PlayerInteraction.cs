@@ -1,11 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI interactionPromptText;
     private GameObject interactedObject;
     public void InteractAction(InputAction.CallbackContext context)
     {
@@ -28,6 +27,10 @@ public class PlayerInteraction : MonoBehaviour
         if (collision.gameObject.CompareTag("Interactable"))
         {
             interactedObject = collision.gameObject;
+            if (interactedObject.TryGetComponent(out IInteractive interactive))
+            {
+                interactionPromptText.text = interactive.InteractionPrompt();
+            }
         }
     }
 
@@ -36,6 +39,7 @@ public class PlayerInteraction : MonoBehaviour
         if (collision.gameObject == interactedObject)
         {
             interactedObject = null;
+            interactionPromptText.text = "";
         }
     }
 }

@@ -3,7 +3,6 @@ using System.IO;
 using TMPro;
 using Newtonsoft.Json;
 using UnityEngine.SceneManagement;
-using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void OnActiveSceneChanged(Scene current, Scene next)
     {
-        if (next.buildIndex != 0 && next.buildIndex != 3)
+        if (next.buildIndex != 0 && next.buildIndex != 5)
         {
             coinText = GameObject.Find("CoinHealthUI").transform.Find("CoinText").GetComponent<TextMeshProUGUI>();
             healthText = GameObject.Find("CoinHealthUI").transform.Find("HealthText").GetComponent<TextMeshProUGUI>();
@@ -65,7 +64,7 @@ public class GameManager : MonoBehaviour
         coinText.text = "" + player.Coins;
     }
 
-    public bool ChangeHealth(int amount)
+    public bool ChangeHealth(float amount)
     {
         player.Health += amount;
         healthText.text = "" + player.Health;
@@ -77,7 +76,7 @@ public class GameManager : MonoBehaviour
         player.CurrentLevel = level;
     }
 
-    public int GetDamage()
+    public float GetDamage()
     {
         return player.Damage;
     }

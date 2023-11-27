@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Lever : MonoBehaviour, IInteractive
@@ -14,6 +12,11 @@ public class Lever : MonoBehaviour, IInteractive
         switched = !switched;
         GetComponent<SpriteRenderer>().sprite = switched ? leverOn : leverOff;
 
-        PuzzleManager.instance.SolvePuzzle(levelNumber, switched);
+        PuzzleManager.instance.SolveLeverPuzzle(levelNumber, switched);
+    }
+
+    public string InteractionPrompt()
+    {
+        return "[E] Switch";
     }
 }

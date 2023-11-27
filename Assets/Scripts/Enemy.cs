@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private int health = 100;
     private PlayerLife playerLife;
     private Animator anim;
     private Rigidbody2D rb;
@@ -15,17 +10,18 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private EdgeCollider2D sword;
     [SerializeField] private LayerMask playerLayer;
-    
+
+    [SerializeField] private float health = 100;
+    [SerializeField] private float cooldown = 1.5f;
+    [SerializeField] private int damage = 20;
 
     private bool dead = false;
-    private float cooldown = 1.5f;
     private float cooldownTimer = Mathf.Infinity;
-    private float range = 2f;
-    private int damage = 20;
+    private float range = 1.5f;
     
     private EnemyMovement enemyMovement;
     
-    void Awake()
+    private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -55,9 +51,8 @@ public class Enemy : MonoBehaviour
 
     private bool PlayerDetected()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(bc.bounds.center + transform.right * range * transform.localScale.x * 0.4f,
-            new Vector3(bc.bounds.size.x * range, bc.bounds.size.y, bc.bounds.size.z),
-            0, Vector2.left, 0, playerLayer);
+        int direction = transform.localScale.x < 0 ? -1 : 1;
+        RaycastHit2D hit = Physics2D.Raycast(bc.bounds.center, transform.right * direction ,range, playerLayer);
 
         if (hit.collider != null)
         {
@@ -65,18 +60,13 @@ public class Enemy : MonoBehaviour
         }
         return hit.collider != null;
     }
-    /*
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(bc.bounds.center + transform.right * range * transform.localScale.x * 0.4f,
-            new Vector3(bc.bounds.size.x * range, bc.bounds.size.y, bc.bounds.size.z));
-    }
-    */
     private void Die()
     {
         PuzzleManager.instance.EnemyDefeated();
-        enemyMovement.enabled = false;
+        if (enemyMovement != null)
+        {
+            enemyMovement.enabled = false;
+        }
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("death");
         bc.enabled = false;
@@ -93,7 +83,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         healthBar.UpdateHealthBar(health);

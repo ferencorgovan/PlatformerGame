@@ -1,38 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 public class ParallaxEffect : MonoBehaviour
 {
-    private float startingPosition;
-    private float lengthOfSprite;
-    public float amountOfParallax;
-    public Camera MainCamera;
+    private float startPosition;
+    private float backgroundLength;
+    [SerializeField] private Camera _camera;
 
     private void Start()
     {
-        startingPosition = transform.position.x;
-        lengthOfSprite = GetComponent<SpriteRenderer>().bounds.size.x;
+        startPosition = transform.position.x;
+        backgroundLength = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
     private void Update()
     {
-        Vector3 Position = MainCamera.transform.position;
-        float Temp = Position.x * (1 - amountOfParallax);
-        float Distance = Position.x * amountOfParallax;
+        Vector3 position = _camera.transform.position;
+        float temp = position.x * 0.9f;
+        float distance = position.x * 0.1f;
 
-        Vector3 NewPosition = new Vector3(startingPosition + Distance, Position.y, transform.position.z);
+        Vector3 newPosition = new Vector3(startPosition + distance, position.y, transform.position.z);
 
-        transform.position = NewPosition;
+        transform.position = newPosition;
 
-        if (Temp > startingPosition + (lengthOfSprite / 2))
+        if (temp > startPosition + (backgroundLength / 2))
         {
-            startingPosition += lengthOfSprite;
+            startPosition += backgroundLength;
         }
-        else if (Temp < startingPosition - (lengthOfSprite / 2))
+        else if (temp < startPosition - (backgroundLength / 2))
         {
-            startingPosition -= lengthOfSprite;
+            startPosition -= backgroundLength;
         }
     }
 }

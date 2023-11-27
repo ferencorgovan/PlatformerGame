@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 public class Chest : MonoBehaviour, IInteractive
 {
@@ -18,6 +16,10 @@ public class Chest : MonoBehaviour, IInteractive
             anim.SetTrigger("open");
             AquireContent();
         }
+    }
+    public string InteractionPrompt()
+    {
+        return "[E] Open";
     }
     private void AquireContent()
     {
@@ -37,10 +39,9 @@ public class Chest : MonoBehaviour, IInteractive
                 break;
         }
     }
-
     private IEnumerator AquireSword()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         weapon.SetActive(true);
     }
 }
