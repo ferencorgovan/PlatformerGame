@@ -44,24 +44,6 @@ public partial class @LaserControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MoveLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""9ebe541c-dfba-4890-a8bf-7ce1e7fc5dea"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""MoveRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""c83bbdc8-ee9a-491c-ba79-8f2fad55b76c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -86,28 +68,6 @@ public partial class @LaserControls: IInputActionCollection2, IDisposable
                     ""action"": ""MoveDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""28434f4a-72dc-4d5c-b2f7-c6a1fefe500d"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""530a693b-cd6b-46b7-8761-919174070e20"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -118,8 +78,6 @@ public partial class @LaserControls: IInputActionCollection2, IDisposable
         m_Laser = asset.FindActionMap("Laser", throwIfNotFound: true);
         m_Laser_MoveUp = m_Laser.FindAction("MoveUp", throwIfNotFound: true);
         m_Laser_MoveDown = m_Laser.FindAction("MoveDown", throwIfNotFound: true);
-        m_Laser_MoveLeft = m_Laser.FindAction("MoveLeft", throwIfNotFound: true);
-        m_Laser_MoveRight = m_Laser.FindAction("MoveRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,16 +141,12 @@ public partial class @LaserControls: IInputActionCollection2, IDisposable
     private List<ILaserActions> m_LaserActionsCallbackInterfaces = new List<ILaserActions>();
     private readonly InputAction m_Laser_MoveUp;
     private readonly InputAction m_Laser_MoveDown;
-    private readonly InputAction m_Laser_MoveLeft;
-    private readonly InputAction m_Laser_MoveRight;
     public struct LaserActions
     {
         private @LaserControls m_Wrapper;
         public LaserActions(@LaserControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveUp => m_Wrapper.m_Laser_MoveUp;
         public InputAction @MoveDown => m_Wrapper.m_Laser_MoveDown;
-        public InputAction @MoveLeft => m_Wrapper.m_Laser_MoveLeft;
-        public InputAction @MoveRight => m_Wrapper.m_Laser_MoveRight;
         public InputActionMap Get() { return m_Wrapper.m_Laser; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,12 +162,6 @@ public partial class @LaserControls: IInputActionCollection2, IDisposable
             @MoveDown.started += instance.OnMoveDown;
             @MoveDown.performed += instance.OnMoveDown;
             @MoveDown.canceled += instance.OnMoveDown;
-            @MoveLeft.started += instance.OnMoveLeft;
-            @MoveLeft.performed += instance.OnMoveLeft;
-            @MoveLeft.canceled += instance.OnMoveLeft;
-            @MoveRight.started += instance.OnMoveRight;
-            @MoveRight.performed += instance.OnMoveRight;
-            @MoveRight.canceled += instance.OnMoveRight;
         }
 
         private void UnregisterCallbacks(ILaserActions instance)
@@ -224,12 +172,6 @@ public partial class @LaserControls: IInputActionCollection2, IDisposable
             @MoveDown.started -= instance.OnMoveDown;
             @MoveDown.performed -= instance.OnMoveDown;
             @MoveDown.canceled -= instance.OnMoveDown;
-            @MoveLeft.started -= instance.OnMoveLeft;
-            @MoveLeft.performed -= instance.OnMoveLeft;
-            @MoveLeft.canceled -= instance.OnMoveLeft;
-            @MoveRight.started -= instance.OnMoveRight;
-            @MoveRight.performed -= instance.OnMoveRight;
-            @MoveRight.canceled -= instance.OnMoveRight;
         }
 
         public void RemoveCallbacks(ILaserActions instance)
@@ -251,7 +193,5 @@ public partial class @LaserControls: IInputActionCollection2, IDisposable
     {
         void OnMoveUp(InputAction.CallbackContext context);
         void OnMoveDown(InputAction.CallbackContext context);
-        void OnMoveLeft(InputAction.CallbackContext context);
-        void OnMoveRight(InputAction.CallbackContext context);
     }
 }

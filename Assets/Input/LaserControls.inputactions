@@ -1,5 +1,5 @@
 {
-    "name": "Laser",
+    "name": "LaserControls",
     "maps": [
         {
             "name": "Laser",
@@ -18,24 +18,6 @@
                     "name": "MoveDown",
                     "type": "Button",
                     "id": "51b20bb6-f353-41ef-978e-06cc89c36817",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "MoveLeft",
-                    "type": "Button",
-                    "id": "9ebe541c-dfba-4890-a8bf-7ce1e7fc5dea",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "MoveRight",
-                    "type": "Button",
-                    "id": "c83bbdc8-ee9a-491c-ba79-8f2fad55b76c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -62,28 +44,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveDown",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "28434f4a-72dc-4d5c-b2f7-c6a1fefe500d",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveLeft",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "530a693b-cd6b-46b7-8761-919174070e20",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
