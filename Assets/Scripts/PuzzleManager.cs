@@ -10,11 +10,12 @@ public class PuzzleManager : MonoBehaviour
     public int enemiesDefeated;
     public int level3_levers;
     private GameObject[] lights;
-    private string lastOpenedDoor;
 
+    private Receiver lastHit;
     private GameObject waypoint1;
     private GameObject waypoint2;
     private GameObject active_waypoint;
+
 
     private Vector2 startPosition;
     private void Awake()
@@ -27,7 +28,7 @@ public class PuzzleManager : MonoBehaviour
         enemiesDefeated = 0;
         level3_levers = 0;
 
-        if(SceneManager.GetActiveScene().buildIndex == 4)
+        if (SceneManager.GetActiveScene().buildIndex == 5)
             startPosition = GameObject.Find("ReceiverWaypoint1").transform.position;
     }
     public void SolveLeverPuzzle(int level, bool switched)
@@ -57,7 +58,7 @@ public class PuzzleManager : MonoBehaviour
 
         for (int i = 0; i < lights.Length; i++)
         {
-            lights[i].GetComponent<SpriteRenderer>().color = 
+            lights[i].GetComponent<SpriteRenderer>().color =
                 (i < level3_levers) ? UnityEngine.Color.green : UnityEngine.Color.red;
         }
 
@@ -90,35 +91,19 @@ public class PuzzleManager : MonoBehaviour
 
     public void SolveLaserPuzzle(GameObject receiver)
     {
-        string doorName = null;
         if (receiver != null)
         {
-            switch (receiver.name)
+            if (receiver.TryGetComponent<Receiver>(out Receiver laserreceiver))
             {
-                case "RedReceiver":
-                    doorName = "FirstDoor";
-                    lastOpenedDoor = "FirstDoor";
-                    break;
-                case "BlueReceiver_Left":
-                    doorName = "LeftDoor";
-                    lastOpenedDoor = "LeftDoor";
-                    break;
-                case "BlueReceiver_Right":
-                    doorName = "RightDoor";
-                    lastOpenedDoor = "RightDoor";
-                    break;
+                laserreceiver.Open();
+                lastHit = laserreceiver;
             }
-        }
-
-        if (doorName != null)
-        {
-            GameObject.Find(doorName).GetComponent<UnlockDoor>().Unlock();
-        }
-        else
-        {
-            if (lastOpenedDoor != null)
+            else
             {
-                GameObject.Find(lastOpenedDoor).GetComponent<UnlockDoor>().Close();
+                if (lastHit != null)
+                {
+                    lastHit.Close();
+                }
             }
         }
     }
@@ -131,7 +116,7 @@ public class PuzzleManager : MonoBehaviour
         {
             active_waypoint = waypoint1;
         }
-        switch (direction) 
+        switch (direction)
         {
             case ButtonDirection.TopLeft:
                 active_waypoint.transform.position = new Vector2(startPosition.x - 3.5f, startPosition.y + 3.5f);

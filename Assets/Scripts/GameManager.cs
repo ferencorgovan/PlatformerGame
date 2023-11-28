@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void OnActiveSceneChanged(Scene current, Scene next)
     {
-        if (next.buildIndex != 0 && next.buildIndex != 5)
+        if (next.buildIndex != 0 && next.buildIndex != SceneManager.sceneCountInBuildSettings - 1)
         {
             coinText = GameObject.Find("CoinHealthUI").transform.Find("CoinText").GetComponent<TextMeshProUGUI>();
             healthText = GameObject.Find("CoinHealthUI").transform.Find("HealthText").GetComponent<TextMeshProUGUI>();
